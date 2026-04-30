@@ -92,9 +92,6 @@ FROM dependencies AS development
 # Copy application code
 COPY --chown=appuser:appuser ./src ./src
 
-# Mount point for source code (overrides the COPY above when mounted)
-VOLUME ["/app"]
-
 # Environment variables for development
 ENV DEBUG=true \
     SERVER_HOST=0.0.0.0 \
