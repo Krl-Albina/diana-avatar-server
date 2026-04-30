@@ -38,7 +38,8 @@ class SampleGeminiAgent(BaseAgent):
 
         Loads Gemini-specific settings from environment variables.
         """
-        self._settings = get_settings()  # Core settings (assistant_instructions, debug)
+        from copy import deepcopy
+        self._settings = deepcopy(get_settings())  # Per-session copy (allows per-session instruction override)
         self._gemini_settings = get_gemini_settings()  # Gemini-specific settings
         self._client: Client | None = None
         self._session: Any | None = None

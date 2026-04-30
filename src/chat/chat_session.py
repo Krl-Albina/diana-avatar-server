@@ -26,6 +26,8 @@ class ChatSession:
         session_id: str,
         settings: Settings,
         wav2arkit_service: Wav2ArkitService,
+        job_title: str = "",
+        company: str = "",
     ):
         logger.info(f"Initializing ChatSession for client: {session_id}")
 
@@ -36,6 +38,16 @@ class ChatSession:
 
         # Unique Agent Instance per Session
         self.agent = create_agent_instance()
+
+        # Override instructions with job-specific context if provided
+        if job_title:
+            base = self.agent._settings.assistant_instructions
+            self.agent._settings.assistant_instructions = (
+                f"{base}\n\nТы проводишь собеседование на должность: {job_title}"
+                + (f" в компании {company}" if company else "")
+                + ". Задавай вопросы именно по этой позиции и оценивай соответствие кандидата."
+            )
+            logger.info(f"Session {session_id}: job context set — {job_title} @ {company}")
         
         # Determine negotiated input sample rate
         self.input_sample_rate = self.agent.input_sample_rate

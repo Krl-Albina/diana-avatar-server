@@ -1,7 +1,7 @@
 
 import uuid
 
-from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, Depends, Query, WebSocket, WebSocketDisconnect
 
 from auth import get_auth_middleware
 from chat import ConnectionManager, get_connection_manager
@@ -20,6 +20,8 @@ async def websocket_endpoint(
     settings: Settings = Depends(get_settings),
     wav2arkit_service: Wav2ArkitService = Depends(get_wav2arkit_service),
     chat_connection_manager: ConnectionManager = Depends(get_connection_manager),
+    job_title: str = Query(default=""),
+    company: str = Query(default=""),
 ) -> None:
 
     # If using reverse proxy (NGINX/Cloudflare), headers might be filtered
@@ -38,7 +40,7 @@ async def websocket_endpoint(
             return
 
     # Connect creates the specific session
-    await chat_connection_manager.connect(websocket, session_id, settings, wav2arkit_service)
+    await chat_connection_manager.connect(websocket, session_id, settings, wav2arkit_service, job_title=job_title, company=company)
 
     try:
         while True:

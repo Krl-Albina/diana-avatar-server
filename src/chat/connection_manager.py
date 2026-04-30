@@ -25,10 +25,12 @@ class ConnectionManager:
         session_id: str,
         settings: Settings,
         wav2arkit_service: Wav2ArkitService,
+        job_title: str = "",
+        company: str = "",
     ) -> ChatSession:
         await websocket.accept()
         
-        session = ChatSession(websocket, session_id, settings, wav2arkit_service)
+        session = ChatSession(websocket, session_id, settings, wav2arkit_service, job_title=job_title, company=company)
         self.sessions[websocket] = session
         
         await session.start()

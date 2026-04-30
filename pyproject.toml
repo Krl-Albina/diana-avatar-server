@@ -11,25 +11,21 @@ dependencies = [
     "fastapi>=0.109.0",
     "uvicorn[standard]>=0.27.0",
     "pydantic-settings>=2.1.0",
-
     # WebSocket support (for OpenAI Realtime client)
     "websockets>=12.0",
-
     # Performance - Fast JSON serialization
     "orjson>=3.9.0",
-
     # Audio processing
     "numpy>=1.24.0",
     "librosa>=0.10.0",
     "scipy>=1.10.0",
-
     # Environment variables
     "python-dotenv>=1.0.0",
-
     # Wav2Arkit model dependencies (ONNX CPU-only)
     "onnxruntime>=1.23.2",
     # AI Agent dependencies
     "google-genai>=1.0.0",  # Google GenAI SDK for Gemini Live API
+    "huggingface-hub[cli]>=1.12.2",
 ]
 
 [dependency-groups]

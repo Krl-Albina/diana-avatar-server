@@ -71,7 +71,8 @@ COPY --chown=appuser:appuser ./src ./src
 # Environment variables
 ENV SERVER_HOST=0.0.0.0 \
     SERVER_PORT=8080 \
-    PYTHONPATH=/app/src
+    PYTHONPATH=/app/src \
+    ONNX_MODEL_PATH=./pretrained_models/wav2arkit_cpu.onnx
 
 # Expose port
 EXPOSE 8080
