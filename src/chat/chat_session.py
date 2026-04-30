@@ -45,7 +45,7 @@ class ChatSession:
             self.agent._settings.assistant_instructions = (
                 f"{base}\n\nТы проводишь собеседование на должность: {job_title}"
                 + (f" в компании {company}" if company else "")
-                + ". Задавай вопросы именно по этой позиции и оценивай соответствие кандидата."
+                + ". Задавай вопросы именно по этой позиции и оценивай соответствие кандидата. Помни: твоё имя — Диана, всегда представляйся именно так."
             )
             logger.info(f"Session {session_id}: job context set — {job_title} @ {company}")
         
