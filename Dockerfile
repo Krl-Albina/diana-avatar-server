@@ -92,8 +92,7 @@ FROM dependencies AS development
 # Copy application code
 COPY --chown=appuser:appuser ./src ./src
 
-# Mount point for source code (overrides the COPY above when mounted)
-VOLUME ["/app"]
+# Mount point for source code: use docker run -v or docker-compose volumes for local dev
 
 # Environment variables for development
 ENV DEBUG=true \
